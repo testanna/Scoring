@@ -11,9 +11,7 @@ import org.springframework.http.*;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.StringUtils;
 import ru.khitrova.scoring.model.*;
-import ru.khitrova.scoring.web.ScoringController;
 
-import javax.validation.ConstraintViolationException;
 import java.math.BigDecimal;
 import java.net.URI;
 
