@@ -3,7 +3,7 @@ package ru.khitrova.scoring.model;
 import java.math.BigDecimal;
 
 /**
- * TODO
+ * Ответ сервиса - одобрен ли кредит, годовой платеж
  */
 public class LoanResponse {
 
