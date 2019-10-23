@@ -13,7 +13,7 @@ public class RepaymentPeriodTest {
     private final String paymentError = "Некорректная сумма годового платежа";
 
     @Test
-    public void minRequiredAmountTestWithMinRepaymentPeriodTest() {
+    public void minRequiredAmountWithMinRepaymentPeriodTest() {
         LoanRequest loanRequest = new LoanRequest();
         loanRequest.age = 30;
         loanRequest.sex = Sex.M;
