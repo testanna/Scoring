@@ -167,7 +167,6 @@ public class InMemoryScoringService implements ScoringService {
         BigDecimal n = lastYearIncome.divide(BigDecimal.valueOf(3), scale, roundingMode);
 
         if (annualPayment.compareTo(lastYearIncome.divide(BigDecimal.valueOf(2), roundingMode)) > 0) {
-            //if (annualPayment.compareTo(n) > 0) {
             return false;
         }
         return true;
