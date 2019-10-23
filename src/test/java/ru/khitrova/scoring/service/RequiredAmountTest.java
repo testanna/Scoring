@@ -206,7 +206,7 @@ public class RequiredAmountTest {
 
         LoanResponse loanResponse = scoringService.checkLoan(loanRequest);
 
-        Assert.assertTrue("Кредит одобрен, если кредитный рейтинг = -1 и сумма = 1",
+        Assert.assertTrue("Кредит НЕ одобрен, если кредитный рейтинг = -1 и сумма = 1",
                 loanResponse.approved);
         Assert.assertTrue(paymentError,
                 loanResponse.annualPayment.compareTo(BigDecimal.valueOf(0.6)) == 0);
