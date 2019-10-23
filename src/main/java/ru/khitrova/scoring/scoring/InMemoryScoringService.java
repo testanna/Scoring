@@ -38,10 +38,11 @@ public class InMemoryScoringService implements ScoringService {
      */
     private boolean checkLoanRequest(LoanRequest loanRequest, BigDecimal annualPayment) {
         if (!((checkAge(loanRequest.age, loanRequest.sex))
+                && (checkLoanRating(loanRequest.creditRating))
+                && (checkSourceOfIncome(loanRequest.sourceOfIncome))
                 && (checkRequestedAmount(loanRequest.sourceOfIncome, loanRequest.creditRating,
                 loanRequest.requestedAmount, loanRequest.lastYearIncome, loanRequest.repaymentPeriod))
-                && (checkLoanRating(loanRequest.creditRating))
-                && (checkSourceOfIncome(loanRequest.sourceOfIncome)))) {
+        )) {
             return false;
         }
 
