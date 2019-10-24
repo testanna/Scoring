@@ -1,7 +1,7 @@
 package ru.khitrova.scoring.model;
 
 /**
- *
+ * Цель кредита
  */
 public enum LoanPurpose {
     /**

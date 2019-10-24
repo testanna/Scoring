@@ -17,7 +17,7 @@ public class InMemoryScoringService implements ScoringService {
     public LoanResponse checkLoan(LoanRequest loanRequest) {
         LoanResponse loanResponse = new LoanResponse();
 
-        BigDecimal interestRate = сomonInterestRate(loanRequest.loanPurpose, loanRequest.creditRating,
+        BigDecimal interestRate = сommonInterestRate(loanRequest.loanPurpose, loanRequest.creditRating,
                 loanRequest.requestedAmount, loanRequest.sourceOfIncome);
         BigDecimal annualPayment = annualPayment(loanRequest.requestedAmount, loanRequest.repaymentPeriod, interestRate);
 
@@ -134,7 +134,7 @@ public class InMemoryScoringService implements ScoringService {
             return BigDecimal.valueOf(1);
         } else if (creditRating == 0) {
             return BigDecimal.valueOf(5);
-        } else if ((creditRating > 0) || (creditRating == 2)) {
+        } else if (creditRating > 0) {
             return BigDecimal.valueOf(10);
         } else {
             return BigDecimal.ZERO;
@@ -161,7 +161,6 @@ public class InMemoryScoringService implements ScoringService {
 
     private boolean checkAnnualPayment(BigDecimal annualPayment,
                                        BigDecimal lastYearIncome) {
-        BigDecimal n = lastYearIncome.divide(BigDecimal.valueOf(3), scale, roundingMode);
 
         if (annualPayment.compareTo(lastYearIncome.divide(BigDecimal.valueOf(2), roundingMode)) > 0) {
             return false;
@@ -186,8 +185,8 @@ public class InMemoryScoringService implements ScoringService {
     /**
      * Общая процентраная ставка
      */
-    private BigDecimal сomonInterestRate(LoanPurpose loanPurpose, int creditRating, BigDecimal requestedAmount,
-                                         SourceOfIncome sourceOfIncome) {
+    private BigDecimal сommonInterestRate(LoanPurpose loanPurpose, int creditRating, BigDecimal requestedAmount,
+                                          SourceOfIncome sourceOfIncome) {
         BigDecimal interestRate = BigDecimal.TEN;
         return interestRate.add(modifierByPurpose(loanPurpose))
                 .add(modifierByRating(creditRating))
