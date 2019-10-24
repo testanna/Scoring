@@ -28,8 +28,7 @@ public class RepaymentPeriodTest {
 
         Assert.assertTrue("Кредит НЕ одобрен, если запрашиваемая сумма = 0.1",
                 loanResponse.approved);
-        Assert.assertTrue(paymentError,
-                loanResponse.annualPayment.compareTo(BigDecimal.valueOf(0.1)) == 0);
+        Assert.assertEquals(paymentError, loanResponse.annualPayment.compareTo(BigDecimal.valueOf(0.1)), 0);
     }
 
     @Test
@@ -48,7 +47,6 @@ public class RepaymentPeriodTest {
 
         Assert.assertTrue("Кредит НЕ одобрен, если запрашиваемая сумма = 100000000 и срок = 20",
                 loanResponse.approved);
-        Assert.assertTrue(paymentError,
-                loanResponse.annualPayment.compareTo(BigDecimal.valueOf(1.4)) == 0);
+        Assert.assertEquals(paymentError, loanResponse.annualPayment.compareTo(BigDecimal.valueOf(1.4)), 0);
     }
 }

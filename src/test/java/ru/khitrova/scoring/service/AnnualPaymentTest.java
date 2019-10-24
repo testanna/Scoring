@@ -10,10 +10,14 @@ import java.math.BigDecimal;
 
 public class AnnualPaymentTest {
     private final ScoringService scoringService = new InMemoryScoringService();
+    private final String approveError = "Кредит не одобрен, а должен был.";
     private final String paymentError = "Некорректная сумма годового платежа.";
+    private final String annualError = paymentError + " OP: %s ПР: %s";
 
     /**
      * TODO подобрать значения для срока, суммы и дохода для тестирования.
+     * Сложность в том, что большинство значений попадает под проверку:
+     * 3. Если результат деления запрошенной суммы на срок погашения в годах более трети годового дохода.
      */
     @Test
     public void incorrectAnnualPaymentWithIncomeTest() {
@@ -54,7 +58,8 @@ public class AnnualPaymentTest {
 
         LoanResponse loanResponse = scoringService.checkLoan(loanRequest);
 
-        Assert.assertTrue("Кредит не одобрен, а должен был", loanResponse.approved);
+        Assert.assertTrue(approveError, loanResponse.approved);
+        Assert.assertTrue(annualError, loanResponse.annualPayment.compareTo(BigDecimal.valueOf(0.6)) == 0);
         Assert.assertTrue(String.format("%s OP: %s ПР: %s", paymentError, 0.6, loanResponse.annualPayment),
                 loanResponse.annualPayment.compareTo(BigDecimal.valueOf(0.6)) == 0);
     }
@@ -73,8 +78,8 @@ public class AnnualPaymentTest {
 
         LoanResponse loanResponse = scoringService.checkLoan(loanRequest);
 
-        Assert.assertTrue("Кредит не одобрен, а должен был", loanResponse.approved);
-        Assert.assertTrue(String.format("%s OP: %s ПР: %s", paymentError, 0.5, loanResponse.annualPayment),
+        Assert.assertTrue(approveError, loanResponse.approved);
+        Assert.assertTrue(String.format(annualError, 0.5, loanResponse.annualPayment),
                 loanResponse.annualPayment.compareTo(BigDecimal.valueOf(0.5)) == 0);
     }
 
@@ -92,8 +97,8 @@ public class AnnualPaymentTest {
 
         LoanResponse loanResponse = scoringService.checkLoan(loanRequest);
 
-        Assert.assertTrue("Кредит не одобрен, а должен был", loanResponse.approved);
-        Assert.assertTrue(String.format("%s OP: %s ПР: %s", paymentError, 0.4, loanResponse.annualPayment),
+        Assert.assertTrue(approveError, loanResponse.approved);
+        Assert.assertTrue(String.format(annualError, 0.4, loanResponse.annualPayment),
                 loanResponse.annualPayment.compareTo(BigDecimal.valueOf(0.4)) == 0);
     }
 
@@ -111,8 +116,8 @@ public class AnnualPaymentTest {
 
         LoanResponse loanResponse = scoringService.checkLoan(loanRequest);
 
-        Assert.assertTrue("Кредит не одобрен, а должен был", loanResponse.approved);
-        Assert.assertTrue(String.format("%s OP: %s ПР: %s", paymentError, 0.5, loanResponse.annualPayment),
+        Assert.assertTrue(approveError, loanResponse.approved);
+        Assert.assertTrue(String.format(annualError, 0.5, loanResponse.annualPayment),
                 loanResponse.annualPayment.compareTo(BigDecimal.valueOf(0.5)) == 0);
     }
 
@@ -130,8 +135,8 @@ public class AnnualPaymentTest {
 
         LoanResponse loanResponse = scoringService.checkLoan(loanRequest);
 
-        Assert.assertTrue("Кредит не одобрен, а должен был", loanResponse.approved);
-        Assert.assertTrue(String.format("%s OP: %s ПР: %s", paymentError, 0.4, loanResponse.annualPayment),
+        Assert.assertTrue(approveError, loanResponse.approved);
+        Assert.assertTrue(String.format(annualError, 0.4, loanResponse.annualPayment),
                 loanResponse.annualPayment.compareTo(BigDecimal.valueOf(0.4)) == 0);
     }
 
@@ -149,8 +154,8 @@ public class AnnualPaymentTest {
 
         LoanResponse loanResponse = scoringService.checkLoan(loanRequest);
 
-        Assert.assertTrue("Кредит не одобрен, а должен был", loanResponse.approved);
-        Assert.assertTrue(String.format("%s OP: %s ПР: %s", paymentError, 2.7, loanResponse.annualPayment),
+        Assert.assertTrue(approveError, loanResponse.approved);
+        Assert.assertTrue(String.format(annualError, 2.7, loanResponse.annualPayment),
                 loanResponse.annualPayment.compareTo(BigDecimal.valueOf(2.7)) == 0);
     }
 
@@ -168,8 +173,8 @@ public class AnnualPaymentTest {
 
         LoanResponse loanResponse = scoringService.checkLoan(loanRequest);
 
-        Assert.assertTrue("Кредит не одобрен, а должен был", loanResponse.approved);
-        Assert.assertTrue(String.format("%s OP: %s ПР: %s", paymentError, 0.3, loanResponse.annualPayment),
+        Assert.assertTrue(approveError, loanResponse.approved);
+        Assert.assertTrue(String.format(annualError, paymentError, 0.3, loanResponse.annualPayment),
                 loanResponse.annualPayment.compareTo(BigDecimal.valueOf(0.3)) == 0);
     }
 
@@ -187,8 +192,8 @@ public class AnnualPaymentTest {
 
         LoanResponse loanResponse = scoringService.checkLoan(loanRequest);
 
-        Assert.assertTrue("Кредит не одобрен, а должен был", loanResponse.approved);
-        Assert.assertTrue(String.format("%s OP: %s ПР: %s", paymentError, 0.4, loanResponse.annualPayment),
+        Assert.assertTrue(approveError, loanResponse.approved);
+        Assert.assertTrue(String.format(annualError, 0.4, loanResponse.annualPayment),
                 loanResponse.annualPayment.compareTo(BigDecimal.valueOf(0.4)) == 0);
     }
 
@@ -206,9 +211,9 @@ public class AnnualPaymentTest {
 
         LoanResponse loanResponse = scoringService.checkLoan(loanRequest);
 
-        Assert.assertTrue("Кредит не одобрен, а должен был", loanResponse.approved);
-        Assert.assertTrue(String.format("%s OP: %s ПР: %s", paymentError, 0.3, loanResponse.annualPayment),
-                loanResponse.annualPayment.compareTo(BigDecimal.valueOf(0.3)) == 0);
+        Assert.assertTrue(approveError, loanResponse.approved);
+        Assert.assertEquals(String.format(annualError, 0.3, loanResponse.annualPayment),
+                loanResponse.annualPayment.compareTo(BigDecimal.valueOf(0.3)), 0);
     }
 
     @Test
@@ -225,9 +230,9 @@ public class AnnualPaymentTest {
 
         LoanResponse loanResponse = scoringService.checkLoan(loanRequest);
 
-        Assert.assertTrue("Кредит не одобрен, а должен был", loanResponse.approved);
-        Assert.assertTrue(String.format("%s OP: %s ПР: %s", paymentError, 0.5, loanResponse.annualPayment),
-                loanResponse.annualPayment.compareTo(BigDecimal.valueOf(0.5)) == 0);
+        Assert.assertTrue(approveError, loanResponse.approved);
+        Assert.assertEquals(String.format(annualError, paymentError, 0.5, loanResponse.annualPayment),
+                loanResponse.annualPayment.compareTo(BigDecimal.valueOf(0.5)), 0);
     }
 
     @Test
@@ -244,9 +249,9 @@ public class AnnualPaymentTest {
 
         LoanResponse loanResponse = scoringService.checkLoan(loanRequest);
 
-        Assert.assertTrue("Кредит не одобрен, а должен был", loanResponse.approved);
-        Assert.assertTrue(String.format("%s OP: %s ПР: %s", paymentError, 1.2, loanResponse.annualPayment),
-                loanResponse.annualPayment.compareTo(BigDecimal.valueOf(1.2)) == 0);
+        Assert.assertTrue(approveError, loanResponse.approved);
+        Assert.assertEquals(String.format(annualError, 1.2, loanResponse.annualPayment),
+                loanResponse.annualPayment.compareTo(BigDecimal.valueOf(1.2)), 0);
     }
 
     @Test
@@ -263,9 +268,9 @@ public class AnnualPaymentTest {
 
         LoanResponse loanResponse = scoringService.checkLoan(loanRequest);
 
-        Assert.assertTrue("Кредит не одобрен, а должен был", loanResponse.approved);
-        Assert.assertTrue(String.format("%s OP: %s ПР: %s", paymentError, 0.2, loanResponse.annualPayment),
-                loanResponse.annualPayment.compareTo(BigDecimal.valueOf(0.2)) == 0);
+        Assert.assertTrue(approveError, loanResponse.approved);
+        Assert.assertEquals(String.format(annualError, 0.2, loanResponse.annualPayment),
+                loanResponse.annualPayment.compareTo(BigDecimal.valueOf(0.2)), 0);
     }
 
     @Test
@@ -282,9 +287,9 @@ public class AnnualPaymentTest {
 
         LoanResponse loanResponse = scoringService.checkLoan(loanRequest);
 
-        Assert.assertTrue("Кредит не одобрен, а должен был", loanResponse.approved);
-        Assert.assertTrue(String.format("%s OP: %s ПР: %s", paymentError, 0.3, loanResponse.annualPayment),
-                loanResponse.annualPayment.compareTo(BigDecimal.valueOf(0.3)) == 0);
+        Assert.assertTrue(approveError, loanResponse.approved);
+        Assert.assertEquals(String.format(annualError, 0.3, loanResponse.annualPayment),
+                loanResponse.annualPayment.compareTo(BigDecimal.valueOf(0.3)), 0);
     }
 
     @Test
@@ -301,9 +306,9 @@ public class AnnualPaymentTest {
 
         LoanResponse loanResponse = scoringService.checkLoan(loanRequest);
 
-        Assert.assertTrue("Кредит не одобрен, а должен был", loanResponse.approved);
-        Assert.assertTrue(String.format("%s OP: %s ПР: %s", paymentError, 0.2, loanResponse.annualPayment),
-                loanResponse.annualPayment.compareTo(BigDecimal.valueOf(0.2)) == 0);
+        Assert.assertTrue(approveError, loanResponse.approved);
+        Assert.assertEquals(String.format(annualError, 0.2, loanResponse.annualPayment),
+                loanResponse.annualPayment.compareTo(BigDecimal.valueOf(0.2)), 0);
     }
 
     @Test
@@ -320,9 +325,9 @@ public class AnnualPaymentTest {
 
         LoanResponse loanResponse = scoringService.checkLoan(loanRequest);
 
-        Assert.assertTrue("Кредит не одобрен, а должен был", loanResponse.approved);
-        Assert.assertTrue(String.format("%s OP: %s ПР: %s", paymentError, 0.3, loanResponse.annualPayment),
-                loanResponse.annualPayment.compareTo(BigDecimal.valueOf(0.3)) == 0);
+        Assert.assertTrue(approveError, loanResponse.approved);
+        Assert.assertEquals(String.format(annualError, 0.3, loanResponse.annualPayment),
+                loanResponse.annualPayment.compareTo(BigDecimal.valueOf(0.3)), 0);
     }
 
 

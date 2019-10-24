@@ -34,8 +34,7 @@ public class AgeTest {
         LoanResponse loanResponse = scoringService.checkLoan(loanRequest);
 
         Assert.assertFalse("Кредит одобрен, если возраст < 18", loanResponse.approved);
-        Assert.assertTrue(paymentError,
-                loanResponse.annualPayment.compareTo(BigDecimal.ZERO) == 0);
+        Assert.assertEquals(paymentError, loanResponse.annualPayment.compareTo(BigDecimal.ZERO), 0);
     }
 
     @Test
@@ -53,8 +52,7 @@ public class AgeTest {
         LoanResponse loanResponse = scoringService.checkLoan(loanRequest);
 
         Assert.assertFalse("Кредит одобрен, если возраст = 0", loanResponse.approved);
-        Assert.assertTrue(paymentError,
-                loanResponse.annualPayment.compareTo(BigDecimal.ZERO) == 0);
+        Assert.assertEquals(paymentError, loanResponse.annualPayment.compareTo(BigDecimal.ZERO), 0);
     }
 
     @Test
@@ -72,8 +70,7 @@ public class AgeTest {
         LoanResponse loanResponse = scoringService.checkLoan(loanRequest);
 
         Assert.assertTrue("Кредит НЕ одобрен, если возраст > 18", loanResponse.approved);
-        Assert.assertTrue(paymentError,
-                loanResponse.annualPayment.compareTo(BigDecimal.valueOf(0.5)) == 0);
+        Assert.assertEquals(paymentError, loanResponse.annualPayment.compareTo(BigDecimal.valueOf(0.5)), 0);
     }
 
     @Test
@@ -91,7 +88,7 @@ public class AgeTest {
         LoanResponse loanResponse = scoringService.checkLoan(loanRequest);
 
         Assert.assertTrue("Кредит НЕ одобрен, если возраст = 18", loanResponse.approved);
-        Assert.assertTrue(paymentError, loanResponse.annualPayment.compareTo(BigDecimal.valueOf(0.5)) == 0);
+        Assert.assertEquals(paymentError, loanResponse.annualPayment.compareTo(BigDecimal.valueOf(0.5)), 0);
     }
 
     @Test
@@ -109,7 +106,7 @@ public class AgeTest {
         LoanResponse loanResponse = scoringService.checkLoan(loanRequest);
 
         Assert.assertTrue("Кредит НЕ одобрен, если возраст < 60 и пол женский", loanResponse.approved);
-        Assert.assertTrue(paymentError, loanResponse.annualPayment.compareTo(BigDecimal.valueOf(0.5)) == 0);
+        Assert.assertEquals(paymentError, loanResponse.annualPayment.compareTo(BigDecimal.valueOf(0.5)), 0);
     }
 
     @Test
@@ -127,7 +124,7 @@ public class AgeTest {
         LoanResponse loanResponse = scoringService.checkLoan(loanRequest);
 
         Assert.assertFalse("Кредит одобрен, если возраст > 60 и пол женский", loanResponse.approved);
-        Assert.assertTrue(paymentError, loanResponse.annualPayment.compareTo(BigDecimal.ZERO) == 0);
+        Assert.assertEquals(paymentError, loanResponse.annualPayment.compareTo(BigDecimal.ZERO), 0);
     }
 
     @Test
@@ -145,7 +142,7 @@ public class AgeTest {
         LoanResponse loanResponse = scoringService.checkLoan(loanRequest);
 
         Assert.assertTrue("Кредит НЕ одобрен, если возраст = 60 и пол женский", loanResponse.approved);
-        Assert.assertTrue(paymentError, loanResponse.annualPayment.compareTo(BigDecimal.valueOf(0.5)) == 0);
+        Assert.assertEquals(paymentError, loanResponse.annualPayment.compareTo(BigDecimal.valueOf(0.5)), 0);
     }
 
     @Test
@@ -163,7 +160,7 @@ public class AgeTest {
         LoanResponse loanResponse = scoringService.checkLoan(loanRequest);
 
         Assert.assertTrue("Кредит НЕ одобрен, если возраст < 65 и пол мужской", loanResponse.approved);
-        Assert.assertTrue(paymentError, loanResponse.annualPayment.compareTo(BigDecimal.valueOf(0.5)) == 0);
+        Assert.assertEquals(paymentError, loanResponse.annualPayment.compareTo(BigDecimal.valueOf(0.5)), 0);
     }
 
     @Test
@@ -181,7 +178,7 @@ public class AgeTest {
         LoanResponse loanResponse = scoringService.checkLoan(loanRequest);
 
         Assert.assertFalse("Кредит одобрен, если возраст > 65 и пол мужской", loanResponse.approved);
-        Assert.assertTrue(paymentError, loanResponse.annualPayment.compareTo(BigDecimal.ZERO) == 0);
+        Assert.assertEquals(paymentError, loanResponse.annualPayment.compareTo(BigDecimal.ZERO), 0);
     }
 
     @Test
@@ -199,6 +196,6 @@ public class AgeTest {
         LoanResponse loanResponse = scoringService.checkLoan(loanRequest);
 
         Assert.assertTrue("Кредит НЕ одобрен, если возраст = 65 и пол мужской", loanResponse.approved);
-        Assert.assertTrue(paymentError, loanResponse.annualPayment.compareTo(BigDecimal.valueOf(0.5)) == 0);
+        Assert.assertEquals(paymentError, loanResponse.annualPayment.compareTo(BigDecimal.valueOf(0.5)), 0);
     }
 }

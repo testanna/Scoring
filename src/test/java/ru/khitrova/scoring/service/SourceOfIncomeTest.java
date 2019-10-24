@@ -28,7 +28,6 @@ public class SourceOfIncomeTest {
         LoanResponse loanResponse = scoringService.checkLoan(loanRequest);
 
         Assert.assertFalse("Кредит одобрен, если заниматель безработный", loanResponse.approved);
-        Assert.assertTrue(paymentError,
-                loanResponse.annualPayment.compareTo(BigDecimal.ZERO) == 0);
+        Assert.assertEquals(paymentError, loanResponse.annualPayment.compareTo(BigDecimal.ZERO), 0);
     }
 }

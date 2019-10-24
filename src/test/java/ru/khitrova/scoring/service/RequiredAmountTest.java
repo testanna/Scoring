@@ -28,8 +28,7 @@ public class RequiredAmountTest {
 
         Assert.assertFalse("Кредит одобрен, если (запрашиваемая сумма / срок) > (доход / 3) ",
                 loanResponse.approved);
-        Assert.assertTrue(paymentError,
-                loanResponse.annualPayment.compareTo(BigDecimal.ZERO) == 0);
+        Assert.assertEquals(paymentError, loanResponse.annualPayment.compareTo(BigDecimal.ZERO), 0);
     }
 
     @Test
@@ -48,8 +47,7 @@ public class RequiredAmountTest {
 
         Assert.assertTrue("Кредит НЕ одобрен, если (запрашиваемая сумма / срок) < = (доход / 3) ",
                 loanResponse.approved);
-        Assert.assertTrue(paymentError,
-                loanResponse.annualPayment.compareTo(BigDecimal.valueOf(2.4)) == 0);
+        Assert.assertEquals(paymentError, loanResponse.annualPayment.compareTo(BigDecimal.valueOf(2.4)), 0);
     }
 
     @Test
@@ -68,8 +66,7 @@ public class RequiredAmountTest {
 
         Assert.assertFalse("Кредит одобрен, если доход пассивный и сумма > 1",
                 loanResponse.approved);
-        Assert.assertTrue(paymentError,
-                loanResponse.annualPayment.compareTo(BigDecimal.ZERO) == 0);
+        Assert.assertEquals(paymentError, loanResponse.annualPayment.compareTo(BigDecimal.ZERO), 0);
     }
 
     @Test
@@ -88,8 +85,7 @@ public class RequiredAmountTest {
 
         Assert.assertTrue("Кредит НЕ одобрен, если доход пассивный и сумма = 1",
                 loanResponse.approved);
-        Assert.assertTrue(paymentError,
-                loanResponse.annualPayment.compareTo(BigDecimal.valueOf(0.5)) == 0);
+        Assert.assertEquals(paymentError, loanResponse.annualPayment.compareTo(BigDecimal.valueOf(0.5)), 0);
     }
 
     @Test
@@ -108,8 +104,7 @@ public class RequiredAmountTest {
 
         Assert.assertFalse("Кредит одобрен, если наемный работник и сумма > 5",
                 loanResponse.approved);
-        Assert.assertTrue(paymentError,
-                loanResponse.annualPayment.compareTo(BigDecimal.ZERO) == 0);
+        Assert.assertEquals(paymentError, loanResponse.annualPayment.compareTo(BigDecimal.ZERO), 0);
     }
 
     @Test
@@ -128,8 +123,7 @@ public class RequiredAmountTest {
 
         Assert.assertTrue("Кредит НЕ одобрен, если наемный работник и сумма = 5",
                 loanResponse.approved);
-        Assert.assertTrue(paymentError,
-                loanResponse.annualPayment.compareTo(BigDecimal.valueOf(3)) == 0);
+        Assert.assertEquals(paymentError, loanResponse.annualPayment.compareTo(BigDecimal.valueOf(3)), 0);
     }
 
     @Test
@@ -148,8 +142,7 @@ public class RequiredAmountTest {
 
         Assert.assertFalse("Кредит одобрен, если собственный бизнес и сумма > 10",
                 loanResponse.approved);
-        Assert.assertTrue(paymentError,
-                loanResponse.annualPayment.compareTo(BigDecimal.ZERO) == 0);
+        Assert.assertEquals(paymentError, loanResponse.annualPayment.compareTo(BigDecimal.ZERO), 0);
     }
 
     @Test
@@ -168,8 +161,7 @@ public class RequiredAmountTest {
 
         Assert.assertTrue("Кредит НЕ одобрен, если собственный бизнес и сумма = 10",
                 loanResponse.approved);
-        Assert.assertTrue(paymentError,
-                loanResponse.annualPayment.compareTo(BigDecimal.valueOf(6)) == 0);
+        Assert.assertEquals(paymentError, loanResponse.annualPayment.compareTo(BigDecimal.valueOf(6)), 0);
     }
 
     @Test
@@ -188,8 +180,7 @@ public class RequiredAmountTest {
 
         Assert.assertFalse("Кредит одобрен, если кредитный рейтинг = -1 и сумма > 1",
                 loanResponse.approved);
-        Assert.assertTrue(paymentError,
-                loanResponse.annualPayment.compareTo(BigDecimal.ZERO) == 0);
+        Assert.assertEquals(paymentError, loanResponse.annualPayment.compareTo(BigDecimal.ZERO), 0);
     }
 
     @Test
@@ -208,8 +199,7 @@ public class RequiredAmountTest {
 
         Assert.assertTrue("Кредит НЕ одобрен, если кредитный рейтинг = -1 и сумма = 1",
                 loanResponse.approved);
-        Assert.assertTrue(paymentError,
-                loanResponse.annualPayment.compareTo(BigDecimal.valueOf(0.6)) == 0);
+        Assert.assertEquals(paymentError, loanResponse.annualPayment.compareTo(BigDecimal.valueOf(0.6)), 0);
     }
 
     @Test
@@ -228,8 +218,7 @@ public class RequiredAmountTest {
 
         Assert.assertFalse("Кредит одобрен, если кредитный рейтинг = 0 и сумма > 5",
                 loanResponse.approved);
-        Assert.assertTrue(paymentError,
-                loanResponse.annualPayment.compareTo(BigDecimal.ZERO) == 0);
+        Assert.assertEquals(paymentError, loanResponse.annualPayment.compareTo(BigDecimal.ZERO), 0);
     }
 
     @Test
@@ -248,8 +237,7 @@ public class RequiredAmountTest {
 
         Assert.assertTrue("Кредит НЕ одобрен, если кредитный рейтинг = 0 и сумма = 5",
                 loanResponse.approved);
-        Assert.assertTrue(paymentError,
-                loanResponse.annualPayment.compareTo(BigDecimal.valueOf(3)) == 0);
+        Assert.assertEquals(paymentError, loanResponse.annualPayment.compareTo(BigDecimal.valueOf(3)), 0);
     }
 
     @Test
@@ -268,8 +256,7 @@ public class RequiredAmountTest {
 
         Assert.assertFalse("Кредит одобрен, если кредитный рейтинг = 1 и сумма > 10",
                 loanResponse.approved);
-        Assert.assertTrue(paymentError,
-                loanResponse.annualPayment.compareTo(BigDecimal.ZERO) == 0);
+        Assert.assertEquals(paymentError, loanResponse.annualPayment.compareTo(BigDecimal.ZERO), 0);
     }
 
     @Test
@@ -288,8 +275,7 @@ public class RequiredAmountTest {
 
         Assert.assertTrue("Кредит НЕ одобрен, если кредитный рейтинг = 1 и сумма = 10",
                 loanResponse.approved);
-        Assert.assertTrue(paymentError,
-                loanResponse.annualPayment.compareTo(BigDecimal.valueOf(6)) == 0);
+        Assert.assertEquals(paymentError, loanResponse.annualPayment.compareTo(BigDecimal.valueOf(6)), 0);
     }
 
 
