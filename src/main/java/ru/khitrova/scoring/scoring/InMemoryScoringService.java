@@ -23,7 +23,7 @@ public class InMemoryScoringService implements ScoringService {
 
         loanResponse.approved = checkLoanRequest(loanRequest, annualPayment);
 
-        if (loanResponse.approved) {
+        if (Boolean.TRUE.equals(loanResponse.approved)) {
             loanResponse.annualPayment = annualPayment;
         } else {
             loanResponse.annualPayment = BigDecimal.ZERO;
@@ -78,19 +78,19 @@ public class InMemoryScoringService implements ScoringService {
             BigDecimal lastYearIncome,
             Integer repaymentPeriod
     ) {
+        BigDecimal yearAmount = requestedAmount.divide(BigDecimal.valueOf(repaymentPeriod), scale, roundingMode);
+        BigDecimal thirdPartOfIncome = lastYearIncome.divide(BigDecimal.valueOf(3), scale, roundingMode);
+
+        if (yearAmount.compareTo(thirdPartOfIncome) > 0) {
+            return false;
+        }
+
         BigDecimal maxAmount = maxAmount(sourceOfIncome, creditRating);
         if (requestedAmount.compareTo(maxAmount) > 0) {
             return false;
         }
 
         if (BigDecimal.ZERO.compareTo(maxAmount) == 0) {
-            return false;
-        }
-
-        BigDecimal yearAmount = requestedAmount.divide(BigDecimal.valueOf(repaymentPeriod), scale, roundingMode);
-        BigDecimal thirdPartOfIncome = lastYearIncome.divide(BigDecimal.valueOf(3), scale, roundingMode);
-
-        if (yearAmount.compareTo(thirdPartOfIncome) > 0) {
             return false;
         }
 
@@ -194,8 +194,8 @@ public class InMemoryScoringService implements ScoringService {
         BigDecimal interestRate = BigDecimal.TEN;
         return interestRate.add(modifierByPurpose(loanPurpose))
                 .add(modifierByRating(creditRating))
-                .add(modifierByRequestedAmount(requestedAmount))
-                .add(modifierBySourceOfIncome(sourceOfIncome));
+                .add(modifierBySourceOfIncome(sourceOfIncome))
+                .add(modifierByRequestedAmount(requestedAmount));
     }
 
     /**
