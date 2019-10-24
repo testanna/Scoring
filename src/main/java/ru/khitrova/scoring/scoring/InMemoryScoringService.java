@@ -46,10 +46,7 @@ public class InMemoryScoringService implements ScoringService {
             return false;
         }
 
-        if (!checkAnnualPayment(annualPayment, loanRequest.lastYearIncome)) {
-            return false;
-        }
-        return true;
+        return checkAnnualPayment(annualPayment, loanRequest.lastYearIncome);
     }
 
     /**
