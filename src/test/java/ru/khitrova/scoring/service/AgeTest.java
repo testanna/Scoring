@@ -8,6 +8,9 @@ import ru.khitrova.scoring.scoring.ScoringService;
 
 import java.math.BigDecimal;
 
+/**
+ * Тесты возможности получения кредита в зависимости от возраста и пола.
+ */
 public class AgeTest {
     private final ScoringService scoringService = new InMemoryScoringService();
     private final int minAge = 18;

@@ -4,7 +4,9 @@ import org.springframework.stereotype.Service;
 import ru.khitrova.scoring.model.*;
 
 import java.math.BigDecimal;
-
+/**
+ * Сервис проверки возможности выдачи кредита и расчета годового платежа.
+ */
 @Service
 public class InMemoryScoringService implements ScoringService {
     /**

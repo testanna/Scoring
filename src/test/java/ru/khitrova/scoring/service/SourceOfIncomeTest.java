@@ -8,6 +8,9 @@ import ru.khitrova.scoring.scoring.ScoringService;
 
 import java.math.BigDecimal;
 
+/**
+ * Тесты возможности получения кредита в зависимости от источника дохода.
+ */
 public class SourceOfIncomeTest {
     private final ScoringService scoringService = new InMemoryScoringService();
     private final SourceOfIncome incorrectSource = SourceOfIncome.UNEMPLOYED;

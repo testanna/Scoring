@@ -15,6 +15,9 @@ import ru.khitrova.scoring.model.*;
 import java.math.BigDecimal;
 import java.net.URI;
 
+/**
+ * Тесты валидации входных значений для контроллера.
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class ScoringControllerTest {

@@ -7,7 +7,9 @@ import ru.khitrova.scoring.scoring.InMemoryScoringService;
 import ru.khitrova.scoring.scoring.ScoringService;
 
 import java.math.BigDecimal;
-
+/**
+ * Тесты возможности получения кредита в зависимости от срока погашения.
+ */
 public class RepaymentPeriodTest {
     private final ScoringService scoringService = new InMemoryScoringService();
     private final String paymentError = "Некорректная сумма годового платежа";

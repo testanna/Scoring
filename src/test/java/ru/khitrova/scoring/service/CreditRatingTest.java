@@ -8,6 +8,9 @@ import ru.khitrova.scoring.scoring.ScoringService;
 
 import java.math.BigDecimal;
 
+/**
+ * Тесты возможности получения кредита в зависимости от кредитного рейтинга.
+ */
 public class CreditRatingTest {
     private final ScoringService scoringService = new InMemoryScoringService();
     private final int incorrectRating = -2;

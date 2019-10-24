@@ -8,6 +8,10 @@ import ru.khitrova.scoring.scoring.ScoringService;
 
 import java.math.BigDecimal;
 
+/**
+ * Тесты возможности получения кредита в зависимости от суммы годового платежа.
+ * Тесты расчета суммы годового платежа в зависимости от значений входных параметров.
+ */
 public class AnnualPaymentTest {
     private final ScoringService scoringService = new InMemoryScoringService();
     private final String approveError = "Кредит не одобрен, а должен был.";

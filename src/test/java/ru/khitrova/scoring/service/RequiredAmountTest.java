@@ -8,6 +8,9 @@ import ru.khitrova.scoring.scoring.ScoringService;
 
 import java.math.BigDecimal;
 
+/**
+ * Тесты возможности получения кредита в зависимости от запрошенной суммы.
+ */
 public class RequiredAmountTest {
     private final ScoringService scoringService = new InMemoryScoringService();
     private final String paymentError = "Некорректная сумма годового платежа";

@@ -1,5 +1,8 @@
 package ru.khitrova.scoring.model;
 
+/**
+ * Источник дохода
+ */
 public enum SourceOfIncome {
     /**
      * Пассивный доход
